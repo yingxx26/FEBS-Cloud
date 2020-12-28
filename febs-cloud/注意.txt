@@ -1,0 +1,17 @@
+﻿FebsUserDetailService是密码模式登陆
+RedisClientDetailsService是授权码模式
+
+
+cc.mrbird.febs.monitor.admin.FebsMonitorAdminApplication ：mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
+
+cc.mrbird.febs.gateway.FebsGatewayApplication：
+mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
+
+cc.mrbird.febs.server.test.FebsServerTestApplication：
+mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
+
+cc.mrbird.febs.auth.FebsAuthApplication：
+mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
+
+cc.mrbird.febs.server.system.FebsServerSystemApplication：
+mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
