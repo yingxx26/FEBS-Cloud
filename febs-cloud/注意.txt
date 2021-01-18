@@ -1,17 +1,21 @@
 ﻿FebsUserDetailService是密码模式登陆
 RedisClientDetailsService是授权码模式
 
+一，redis启动
+1，进入E:\Redis-x64-3.0.504
+2，当前目录 cmd
+  redis-server.exe redis.windows.conf
 
-cc.mrbird.febs.monitor.admin.FebsMonitorAdminApplication ：mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
+二，Nacos启动
+1，进入E:\nacos\bin
+2，双击bin/startup.cmd
+3，访问http://localhost:8001/nacos
+   用户名febs密码123456
 
-cc.mrbird.febs.gateway.FebsGatewayApplication：
-mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
+三，启动微服务
 
-cc.mrbird.febs.server.test.FebsServerTestApplication：
-mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
-
-cc.mrbird.febs.auth.FebsAuthApplication：
-mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
-
-cc.mrbird.febs.server.system.FebsServerSystemApplication：
-mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;nacos.url=127.0.0.1;febs-gateway=127.0.0.1;febs-monitor-admin=127.0.0.1
+FebsTxManagerApplication;
+FebsAdminApplication;
+FebsAuthApplication;
+FebsServerSystemApplication;
+FebsGatewayApplication。
