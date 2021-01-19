@@ -1,5 +1,6 @@
 package cc.mrbird.febs.common.security.starter.configure;
 
+import cc.mrbird.febs.auth.authofmytest.mobile.SmsCodeAuthenticationSecurityConfig;
 import cc.mrbird.febs.common.core.entity.constant.EndpointConstant;
 import cc.mrbird.febs.common.core.entity.constant.StringConstant;
 import cc.mrbird.febs.common.security.starter.handler.FebsAccessDeniedHandler;
@@ -25,6 +26,18 @@ public class FebsCloudResourceServerConfigure extends ResourceServerConfigurerAd
     private FebsCloudSecurityProperties properties;
     private FebsAccessDeniedHandler accessDeniedHandler;
     private FebsAuthExceptionEntryPoint exceptionEntryPoint;
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////短信验证码/////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
+    @Autowired(required = false)
+    public void setSmsCodeAuthenticationSecurityConfig(SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig) {
+        this.smsCodeAuthenticationSecurityConfig = smsCodeAuthenticationSecurityConfig;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     @Autowired(required = false)
     public void setProperties(FebsCloudSecurityProperties properties) {
@@ -61,6 +74,8 @@ public class FebsCloudResourceServerConfigure extends ResourceServerConfigurerAd
                 .authorizeRequests()
                 .antMatchers(anonUrls).permitAll()
                 .antMatchers(properties.getAuthUri()).authenticated()
+                .and()
+                .apply(smsCodeAuthenticationSecurityConfig)
                 .and()
                 .httpBasic();
     }

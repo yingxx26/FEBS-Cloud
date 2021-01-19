@@ -33,6 +33,13 @@ public class FebsUserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         HttpServletRequest httpServletRequest = FebsUtil.getHttpServletRequest();
+        ////////////////////////////////////短信验证码/////////////////////////////////////////////////////////////
+        String typeparameter = httpServletRequest.getParameter(ParamsConstant.LOGIN_TYPE);
+        if (StringUtils.equals(typeparameter, "sms")) {
+            System.out.println("短信验证码");
+            return null;
+        }
+        /////////////////////////////////////////////////////////////////////////////////////////////////
         SystemUser systemUser = userManager.findByName(username);
         if (systemUser != null) {
             String permissions = userManager.findUserPermissions(systemUser.getUsername());
@@ -45,7 +52,6 @@ public class FebsUserDetailServiceImpl implements UserDetailsService {
             if (StringUtils.equals(loginType, SocialConstant.SOCIAL_LOGIN)) {
                 password = passwordEncoder.encode(SocialConstant.getSocialLoginPassword());
             }
-
             List<GrantedAuthority> grantedAuthorities = AuthorityUtils.NO_AUTHORITIES;
             if (StringUtils.isNotBlank(permissions)) {
                 grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(permissions);
