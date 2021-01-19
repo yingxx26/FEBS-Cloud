@@ -1,0 +1,57 @@
+server:
+  port: 8501
+spring:
+  boot:
+    admin:
+      client:
+        url: http://${febs-admin}:8401
+        username: febs
+        password: 123456
+        instance:
+          prefer-ip: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${mysql.url}:3306/febs_cloud_base?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    username: root
+    password: 123456
+  redis:
+    database: 0
+    host: ${redis.url}
+    port: 6379
+    lettuce:
+      pool:
+        min-idle: 8
+        max-idle: 500
+        max-active: 2000
+        max-wait: 10000
+    timeout: 5000
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: "@project.description@"
+    version: "@project.version@"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+tx-lcn:
+  manager:
+    host: 0.0.0.0
+    # TM监听Socket端口.
+    port: 8888
+    # TM控制台密码
+    admin-key: 123456
+  logger:
+    # 开启日志记录
+    enabled: true
+    driver-class-name: ${spring.datasource.driver-class-name}
+    jdbc-url: ${spring.datasource.url}
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
