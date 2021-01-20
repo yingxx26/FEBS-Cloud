@@ -32,3 +32,9 @@ FebsGatewayApplication。
 github
 Client ID  ： 6f7ec8971e5ff4ab2195
 Client secrets ： 31be616df593eff6b577b49ac0bb6c86bd8d9580
+redirect-url   http://yxx.free.vipnps.vip:8301/auth/social/github/callback
+
+gitee
+Client ID  ： 0c3d73c14d8541a947c6bc8b4dfd78cd3ff6d9f28fcfcf699b4c3d8587186527
+Client secrets ： 0da2e62338a8ecc37c506abf0c16f0807fad3a34ba9fa78d001a9f2e6494bffc
+redirect-url   http://yxx.free.vipnps.vip:8301/auth/social/gitee/callback

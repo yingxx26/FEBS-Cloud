@@ -15,23 +15,20 @@ import java.util.UUID;
 
 /**
  * 短信登录配置
+ * (方案一，未使用)
  *
- * @author paascloud.net @gmail.com
+ * @author yxx
  */
-@Component
+//@Component
 public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-    @Autowired
+    /*@Autowired
     private AuthenticationSuccessHandler pcAuthenticationSuccessHandler;
     @Autowired
     private AuthenticationFailureHandler pcAuthenticationFailureHandler;
     @Autowired
     private UserDetailsService userDetailsService;
 
-    /**
-     * Configure.
-     *
-     * @param http the http
-     */
+
     @Override
     public void configure(HttpSecurity http) {
 
@@ -47,8 +44,6 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
         http.authenticationProvider(smsCodeAuthenticationProvider)
                 .addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-//		
-
-    }
+    }*/
 
 }

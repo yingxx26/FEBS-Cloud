@@ -1,5 +1,7 @@
 package cc.mrbird.febs.common.security.starter.configure;
 
+import cc.mrbird.febs.auth.authofmytest.mobile.SmsCodeAuthenticationFilter;
+import cc.mrbird.febs.auth.authofmytest.mobile.SmsCodeAuthenticationProvider;
 import cc.mrbird.febs.auth.authofmytest.mobile.SmsCodeAuthenticationSecurityConfig;
 import cc.mrbird.febs.common.core.entity.constant.EndpointConstant;
 import cc.mrbird.febs.common.core.entity.constant.StringConstant;
@@ -11,10 +13,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.UUID;
 
 /**
  * @author MrBird
@@ -26,16 +35,25 @@ public class FebsCloudResourceServerConfigure extends ResourceServerConfigurerAd
     private FebsCloudSecurityProperties properties;
     private FebsAccessDeniedHandler accessDeniedHandler;
     private FebsAuthExceptionEntryPoint exceptionEntryPoint;
+    ////////////方案二/////////////////
+
+    private UserDetailsService userDetailsService;
+
+    @Autowired(required = false)
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+    /////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////短信验证码/////
+    /////短信验证码（方案一）/////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+    /*private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Autowired(required = false)
     public void setSmsCodeAuthenticationSecurityConfig(SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig) {
         this.smsCodeAuthenticationSecurityConfig = smsCodeAuthenticationSecurityConfig;
-    }
+    }*/
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -56,6 +74,18 @@ public class FebsCloudResourceServerConfigure extends ResourceServerConfigurerAd
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        ////////////方案二/////////////////
+        SmsCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsCodeAuthenticationFilter();
+        smsCodeAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
+        String key = UUID.randomUUID().toString();
+
+        SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
+        smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);
+
+        http.authenticationProvider(smsCodeAuthenticationProvider)
+                .addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        /////////////////////////////
+
         if (properties == null) {
             premitAll(http);
             return;
@@ -75,8 +105,10 @@ public class FebsCloudResourceServerConfigure extends ResourceServerConfigurerAd
                 .antMatchers(anonUrls).permitAll()
                 .antMatchers(properties.getAuthUri()).authenticated()
                 .and()
-                .apply(smsCodeAuthenticationSecurityConfig)
-                .and()
+                ////////////方案一/////////////////
+                //.apply(smsCodeAuthenticationSecurityConfig)
+                //.and()
+                /////////////////////////////
                 .httpBasic();
     }
 
