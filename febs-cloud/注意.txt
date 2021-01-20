@@ -4,8 +4,6 @@
   客户端只能通过OAuth2协议发放的令牌来从资源服务器中获取受保护的资源。
 这是因为当我们引入了spring-cloud-starter-oauth2依赖后，系统会暴露一组由/oauth开头的端点
 
-FebsUserDetailService是密码模式登陆
-RedisClientDetailsService是授权码模式
 
 一，redis启动
 1，进入E:\Redis-x64-3.0.504
@@ -25,3 +23,12 @@ FebsAdminApplication;
 FebsAuthApplication;
 FebsServerSystemApplication;
 FebsGatewayApplication。
+
+四，内网穿透
+访问 https://www.fgnwct.com/home.html
+找到 Windows 启动命令: npc.exe -server=free.vipnps.vip:8024 -vkey=62316d0b06c048a7
+点击傻瓜式运行
+
+github
+Client ID  ： 6f7ec8971e5ff4ab2195
+Client secrets ： 31be616df593eff6b577b49ac0bb6c86bd8d9580
