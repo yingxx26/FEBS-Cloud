@@ -44,7 +44,7 @@ public class SocialLoginController {
 
 
     /**
-     * 登录
+     * 登录（跳转授权页面）
      *
      * @param oauthType 第三方登录类型
      * @param response  response
@@ -57,7 +57,7 @@ public class SocialLoginController {
     }
 
     /**
-     * 登录成功后的回调
+     * 登录成功后的回调（携带着授权码 authCallback.code）
      *
      * @param oauthType 第三方登录类型
      * @param callback  携带返回的信息

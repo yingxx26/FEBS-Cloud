@@ -29,6 +29,8 @@ FebsGatewayApplication。
 找到 Windows 启动命令: npc.exe -server=free.vipnps.vip:8024 -vkey=62316d0b06c048a7
 点击傻瓜式运行
 
+
+五，社交登陆用的justauth第三方开源组件
 github
 Client ID  ： 6f7ec8971e5ff4ab2195
 Client secrets ： 31be616df593eff6b577b49ac0bb6c86bd8d9580
@@ -38,3 +40,7 @@ gitee
 Client ID  ： 0c3d73c14d8541a947c6bc8b4dfd78cd3ff6d9f28fcfcf699b4c3d8587186527
 Client secrets ： 0da2e62338a8ecc37c506abf0c16f0807fad3a34ba9fa78d001a9f2e6494bffc
 redirect-url   http://yxx.free.vipnps.vip:8301/auth/social/gitee/callback
+
+六，社交登陆流程
+ 1，登录（跳转授权页面），获取授权码
+ 2，获取授权码后回调（携带着授权码 authCallback.code），获取access_token，用access_token获取gitee用户信息。获取不到提示绑定或注册后绑定，获取到了直接登陆
