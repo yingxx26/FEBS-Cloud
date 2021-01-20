@@ -136,7 +136,7 @@ public class SocialLoginController {
     }
 
     /**
-     * 根据用户名获取绑定关系
+     * 根据用户名获取绑定关系（查找已经绑定的）
      *
      * @param username 用户名
      * @return FebsResponse

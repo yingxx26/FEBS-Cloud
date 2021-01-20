@@ -58,7 +58,8 @@ public class SocialLoginServiceImpl implements SocialLoginService {
 
     @Override
     public AuthRequest renderAuth(String oauthType) throws FebsException {
-        return factory.get(getAuthSource(oauthType));
+        AuthSource authSource = getAuthSource(oauthType);
+        return factory.get(authSource);
     }
 
     @Override
@@ -82,9 +83,12 @@ public class SocialLoginServiceImpl implements SocialLoginService {
         if (response.ok()) {
             AuthUser authUser = (AuthUser) response.getData();
             UserConnection userConnection = userConnectionService.selectByCondition(authUser.getSource().toString(), authUser.getUuid());
+            //查找关系表中有没 gitee用户信息
             if (userConnection == null) {
+                //没有跳转绑定页面
                 febsResponse.message(NOT_BIND).data(authUser);
             } else {
+                //有则用用户信息和clientDetails生成OAuth2AccessToken
                 SystemUser user = userManager.findByName(userConnection.getUserName());
                 if (user == null) {
                     throw new FebsException("系统中未找到与第三方账号对应的账户");

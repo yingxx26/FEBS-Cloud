@@ -42,6 +42,7 @@ public class UserConnectionServiceImpl extends ServiceImpl<UserConnectionMapper,
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteByCondition(String username, String providerName) {
+        //mybatisplus， Lambda的新用法
         LambdaQueryWrapper<UserConnection> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(UserConnection::getUserName, username);
         queryWrapper.eq(UserConnection::getProviderName, providerName);

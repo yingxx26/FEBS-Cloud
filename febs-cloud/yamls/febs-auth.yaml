@@ -83,9 +83,9 @@ justauth:
       client-secret:
       redirect-uri:
     qq:
-      client-id:
-      client-secret:
-      redirect-uri:
+      client-id: 100550231
+      client-secret: 69b6ab57b22f3c2fe6a6149274e3295e
+      redirect-uri: http://yxx.free.vipnps.vip:8301/auth/social/qq/callback
     microsoft:
       client-id:
       client-secret:
