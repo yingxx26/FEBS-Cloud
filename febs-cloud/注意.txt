@@ -42,7 +42,7 @@ Client secrets ： 0da2e62338a8ecc37c506abf0c16f0807fad3a34ba9fa78d001a9f2e6494b
 redirect-url   http://yxx.free.vipnps.vip:8301/auth/social/gitee/callback
 
 六，社交登陆流程
- 1，登录（跳转授权页面），获取授权码，若gitee本地有账号登陆，则去绑定页面，若gitee本地没有登陆则去gitee登陆页面
+ 1，登录（跳转授权页面），若gitee本地有账号登陆，则直接生成授权码，去回调地址；若gitee本地没有登陆则去gitee登陆页面，登陆后生成授权码，再去回调地址
  2，获取授权码后回调（携带着授权码 authCallback.code），获取access_token，用access_token获取gitee用户信息。
    查看用户信息是否在绑定表里，没有则提示绑定或注册后绑定，有则直接登陆
- 3,绑定  ，  https://gitee.com/oauth/token
+ 3,绑定  ，  https://gitee.com/oauth/token   ？？？绑定是否也要走一遍oauth流程
