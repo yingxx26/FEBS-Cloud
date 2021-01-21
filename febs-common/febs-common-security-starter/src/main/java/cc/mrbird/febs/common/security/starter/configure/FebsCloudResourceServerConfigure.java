@@ -99,10 +99,10 @@ public class FebsCloudResourceServerConfigure extends ResourceServerConfigurerAd
             return;
         }
         http.csrf().disable()
-                .requestMatchers().antMatchers(properties.getAuthUri())
+                .requestMatchers().antMatchers(properties.getAuthUri()) // getAuthUri的值是 /**
                 .and()
                 .authorizeRequests()
-                .antMatchers(anonUrls).permitAll()
+                .antMatchers(anonUrls).permitAll()  // anonUrls的值是 /actuator/**,/captcha,/social/**,/v2/api-docs,/v2/api-docs-ext,/login,/resource/**,/test/**
                 .antMatchers(properties.getAuthUri()).authenticated()
                 .and()
                 ////////////方案一/////////////////
