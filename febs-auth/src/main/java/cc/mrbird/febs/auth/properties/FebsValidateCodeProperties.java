@@ -12,7 +12,8 @@ public class FebsValidateCodeProperties {
     /**
      * 验证码有效时间，单位秒
      */
-    private Long time = 120L;
+    //private Long time = 120L;
+    private Long time = 120000L;
     /**
      * 验证码类型，可选值 png和 gif
      */

@@ -1,12 +1,4 @@
-﻿1,FebsSecurityConfigure(继承WebSecurityConfigurerAdapter)用于处理/oauth开头的请求，Spring Cloud OAuth内部定义的获取令牌，
-  刷新令牌的请求地址都是以/oauth/开头的，也就是说FebsSecurityConfigure用于处理和令牌相关的请求。
-2,FebsResourceServerConfigure(@EnableResourceServer ,继承ResourceServerConfigurerAdapter)用于处理非/oauth/开头的请求，其主要用于资源的保护，
-  客户端只能通过OAuth2协议发放的令牌来从资源服务器中获取受保护的资源。
-这是因为当我们引入了spring-cloud-starter-oauth2依赖后，系统会暴露一组由/oauth开头的端点
-
-3,认证服务器配置@EnableAuthorizationServer
-
-一，redis启动
+﻿一，redis启动
 1，进入E:\Redis-x64-3.0.504
 2，当前目录 cmd
   redis-server.exe redis.windows.conf
@@ -43,14 +35,9 @@ Client ID  ： 0c3d73c14d8541a947c6bc8b4dfd78cd3ff6d9f28fcfcf699b4c3d8587186527
 Client secrets ： 0da2e62338a8ecc37c506abf0c16f0807fad3a34ba9fa78d001a9f2e6494bffc
 redirect-url   http://yxx.free.vipnps.vip:8301/auth/social/gitee/callback
 
-六，社交登陆流程
- 1，登录（跳转授权页面），若gitee本地有账号登陆，则直接生成授权码，去回调地址；若gitee本地没有登陆则去gitee登陆页面，登陆后生成授权码，再去回调地址
- 2，获取授权码后回调（携带着授权码 authCallback.code），获取access_token，用access_token获取gitee用户信息。
- 以上是gitee的oauth流程
-   查看gitee用户信息是否在绑定表里，没有则提示绑定或注册后绑定，有则直接登陆自己的oauth流程
- 3, 若要绑定@PostMapping("bind/login")， 关联信息插入数据库，和直接登陆一样走一遍自己的oauth流程
-七，绑定流程
- 1，登录（跳转授权页面），若gitee本地有账号登陆，则直接生成授权码，去回调地址；若gitee本地没有登陆则去gitee登陆页面，登陆后生成授权码，再去回调地址
- 2，获取授权码后回调（携带着授权码 authCallback.code），获取access_token，用access_token获取gitee用户信息。
- 3, 自动绑定@PostMapping("bind")，关联信息插入数据库，不需要oauth流程
+
+AbstractAuthenticationProcessingFilter
+OAuth2AuthenticationProcessingFilter
+
+
 

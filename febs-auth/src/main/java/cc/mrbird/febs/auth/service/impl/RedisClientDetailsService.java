@@ -36,6 +36,7 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
 
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws InvalidClientException {
+        System.out.println(this.getClass() + ".loadClientByClientId  " + clientId);
         ClientDetails clientDetails = null;
         String value = (String) redisService.hget(CACHE_CLIENT_KEY, clientId);
         if (StringUtils.isBlank(value)) {

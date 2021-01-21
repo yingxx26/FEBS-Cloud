@@ -32,6 +32,8 @@ public class FebsUserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("FebsUserDetailServiceImpl.loadUserByUsername" + username);
+
         HttpServletRequest httpServletRequest = FebsUtil.getHttpServletRequest();
         ////////////////////////////////////短信验证码/////////////////////////////////////////////////////////////
         String typeparameter = httpServletRequest.getParameter(ParamsConstant.LOGIN_TYPE);
