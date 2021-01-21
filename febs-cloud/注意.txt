@@ -27,6 +27,7 @@ FebsGatewayApplication。
 四，内网穿透
 访问 https://www.fgnwct.com/home.html
 找到 Windows 启动命令: npc.exe -server=free.vipnps.vip:8024 -vkey=62316d0b06c048a7
+进入E:\Program Files (x86)\feigeNet
 点击傻瓜式运行
 
 
@@ -44,5 +45,9 @@ redirect-url   http://yxx.free.vipnps.vip:8301/auth/social/gitee/callback
 六，社交登陆流程
  1，登录（跳转授权页面），若gitee本地有账号登陆，则直接生成授权码，去回调地址；若gitee本地没有登陆则去gitee登陆页面，登陆后生成授权码，再去回调地址
  2，获取授权码后回调（携带着授权码 authCallback.code），获取access_token，用access_token获取gitee用户信息。
-   查看用户信息是否在绑定表里，没有则提示绑定或注册后绑定，有则直接登陆
- 3,绑定  ，  https://gitee.com/oauth/token   ？？？绑定是否也要走一遍oauth流程
+   查看用户信息是否在绑定表里，没有则提示绑定或注册后绑定，有则直接登陆oauth流程
+ 3, 若要绑定@PostMapping("bind/login")， 关联信息插入数据库， https://gitee.com/oauth/token ，和直接登陆一样走一遍oauth流程
+七，绑定流程
+ 1，登录（跳转授权页面），若gitee本地有账号登陆，则直接生成授权码，去回调地址；若gitee本地没有登陆则去gitee登陆页面，登陆后生成授权码，再去回调地址
+ 2，获取授权码后回调（携带着授权码 authCallback.code），获取access_token，用access_token获取gitee用户信息。
+ 3, 自动绑定@PostMapping("bind")，关联信息插入数据库，不需要oauth流程
